@@ -37,10 +37,7 @@ public class CsvcompareApplication implements CommandLineRunner {
 	public void run(String... args){
 		String mobiFile = env.getProperty("mobi.file.location");
 		String tivoFile = env.getProperty("tivo.file.location");
-		logger.info("mobiFile: "+mobiFile);
-		logger.info("tivoFile: "+tivoFile);
 		String destinationDir = env.getProperty("destination.file.loaction");
-		logger.info("destinationDir: "+destinationDir);
 
 		File destinationObject = new File(destinationDir);
 		if(!destinationObject.exists()){
@@ -62,9 +59,6 @@ public class CsvcompareApplication implements CommandLineRunner {
 			Path destinationTivoPath = Paths.get(destinationDir).resolve(destinationTivoFileName);
 			Files.copy(mobiPath, destinationMobiPath, StandardCopyOption.REPLACE_EXISTING);
 			Files.copy(tivoPath, destinationTivoPath, StandardCopyOption.REPLACE_EXISTING);
-			logger.info("destinationMobiPath.toString(): "+destinationMobiPath.toString());
-			logger.info("destinationTivoPath.toString(): "+destinationTivoPath.toString());
-			//serviceImpl.compareCsvFiles(mobiFile, tivoFile);
 			serviceImpl.compareCsvFiles(destinationMobiPath.toString(), destinationTivoPath.toString());
 		}
 		catch (Exception e) {
@@ -73,13 +67,9 @@ public class CsvcompareApplication implements CommandLineRunner {
 	}
 
 	private String addTimeStampFileName(String fileName, String timeStamp){
-		logger.info("fileName: "+fileName);
 		int extensionIndex = fileName.lastIndexOf(".");
-		logger.info("extensionIndex: "+extensionIndex);
 		String nameWithoutExtension = fileName.substring(0, extensionIndex);
-		logger.info("nameWithoutExtension: "+nameWithoutExtension);
 		String extension = fileName.substring(extensionIndex);
-		logger.info("extension: "+extension);
 		if(filenameChangeFlag == 0){
 			filenameChangeFlag =+1;
 			return nameWithoutExtension + "_" + "mobi" + "_"+timeStamp+extension;

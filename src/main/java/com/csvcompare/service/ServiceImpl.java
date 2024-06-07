@@ -22,12 +22,8 @@ public class ServiceImpl {
     public void compareCsvFiles(String mobiCsvFile, String tivoCsvFile){
 
         try{
-            logger.info("mobiCsvFile: "+mobiCsvFile);
-            logger.info("tivoCsvFile: "+tivoCsvFile);
             File mobiChannelList = new File(mobiCsvFile);
             File tivoChannelList = new File(tivoCsvFile);
-            logger.info("mobiChanelList: "+mobiChannelList);
-            logger.info("tivoChannelList: "+tivoChannelList);
 
             //check if the file Exists
             if(!mobiChannelList.exists() || !tivoChannelList.exists()){
